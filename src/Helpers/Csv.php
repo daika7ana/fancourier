@@ -105,7 +105,7 @@ class Csv {
         $return_data = [];
         foreach ($data as $key => $value) {
             
-            $filename = tempnam("/tmp", "FanCourier".  time(). ".csv");
+            $filename = @tempnam("/tmp", "FanCourier".  time(). ".csv");
             $csv = fopen($filename, 'w');
             try {
                 reset($value);
