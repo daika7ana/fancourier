@@ -1,11 +1,15 @@
 {
-    "name": "seniorprogramming/fancourier",
+    "name": "daika7ana/fancourier",
     "description": "FanCourier API Client",
     "license": "MIT",
     "authors": [
         {
             "name": "Maria Petrescu",
             "email": "mpetrescu@seniorprogramming.ro"
+        },
+        {
+            "name": "Pana Dan-Radu",
+            "email": "danradu.pana@gmail.com"
         }
     ],
     "minimum-stability": "dev",
