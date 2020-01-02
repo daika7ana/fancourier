@@ -2,12 +2,12 @@
 
 namespace SeniorProgramming\FanCourier\Core;
 
+use GuzzleHttp\Client as Guzzle;
+use SeniorProgramming\FanCourier\Helpers\Csv;
 use SeniorProgramming\FanCourier\Core\BaseInterface;
 use SeniorProgramming\FanCourier\Exceptions\FanCourierInstanceException;
-use SeniorProgramming\FanCourier\Exceptions\FanCourierUnknownModelException;
 use SeniorProgramming\FanCourier\Exceptions\FanCourierInvalidParamException;
-use \Curl\Curl;
-use SeniorProgramming\FanCourier\Helpers\Csv;
+use SeniorProgramming\FanCourier\Exceptions\FanCourierUnknownModelException;
 
 abstract class Base  implements BaseInterface {
     
@@ -71,18 +71,26 @@ abstract class Base  implements BaseInterface {
      */
     private function postCurlRequest ($data, $url, $resultType)
     {
-        
         $this->checkParams($data);
         $this->checkUrl($url);
-        
-        $curl = new Curl();
-        $curl->post($url, $data);
-        if ($curl->error) {
-            throw new FanCourierInstanceException('Invalid curl error. Code: '. $curl->errorCode . '. Message: '. $curl->errorMessage);
-        } else {
-            return $this->getResultType($resultType, $curl->response);
+
+        $client = new Guzzle();
+        $new_data = [];
+
+        foreach($data as $key => $value) {
+            $new_data[] = array(
+                'name' => $key,
+                'contents' => is_object($value) ? fopen($value->name, 'r') : $value
+            );
         }
-        
+
+        try {
+            $response = $client->post($url, [ 'multipart' => $new_data ]);
+        } catch (\Exception $e) {
+            throw new FanCourierInstanceException('Guzzle error. Message: '. $e->getMessage());
+        } finally {
+            return $this->getResultType($resultType, $response->getBody()->getContents());
+        }    
     }
     
     /**
