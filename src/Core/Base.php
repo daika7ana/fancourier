@@ -88,9 +88,9 @@ abstract class Base  implements BaseInterface {
             $response = $client->post($url, [ 'multipart' => $new_data ]);
         } catch (\Exception $e) {
             throw new FanCourierInstanceException('Guzzle error. Message: '. $e->getMessage());
-        } finally {
-            return $this->getResultType($resultType, $response->getBody()->getContents());
-        }    
+        }
+        
+        return $this->getResultType($resultType, $response->getBody()->getContents());    
     }
     
     /**
