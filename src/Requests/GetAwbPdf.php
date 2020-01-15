@@ -4,7 +4,7 @@ namespace SeniorProgramming\Fancourier\Requests;
 
 use SeniorProgramming\FanCourier\Core\Endpoint;
 
-class GetAwb extends Endpoint {
+class GetAwbPdf extends Endpoint {
     
     /**
      * 
@@ -12,7 +12,7 @@ class GetAwb extends Endpoint {
      */
     protected function getCallMethod()
     {
-        return 'view_awb_integrat.php';
+        return 'view_awb_integrat_pdf.php';
     }
     
     /**
@@ -20,7 +20,7 @@ class GetAwb extends Endpoint {
      * @return string
      */
     public function fetchResults() {
-        return 'html';
+        return 'pdf';
     }
     
     /**
@@ -41,7 +41,7 @@ class GetAwb extends Endpoint {
     public function validate($params = array())
     {
         parent::requiredParams(array_keys($params), $this->methodRequirements());
-        return true;   
+        return true;
     }
     
     /**
@@ -55,4 +55,3 @@ class GetAwb extends Endpoint {
         ];
     }
 }
-

@@ -37,13 +37,6 @@ class ApiServiceProvider extends ServiceProvider  {
     private function registerServices()
     {
         $this->app->bind('fancourier','SeniorProgramming\FanCourier\Services\ApiService');
-//        $this->app->singleton('FanCourier', function(){
-//            
-//            return new ApiService(config('username'), config('password'), config('client_id'));
-//        });
-        //$this->app->alias('FanCourier', 'fancourier');
-        //dd(config('username'));
-        //$this->app->bind('SeniorProgramming\Fancourier\Services\ApiService','SeniorProgramming\Fancourier\Services\ApiService');
     }
     
     /**
@@ -54,13 +47,6 @@ class ApiServiceProvider extends ServiceProvider  {
         $this->mergeConfigFrom(
             __DIR__.'/../../config/fancourier.php', 'fancourier'
         );
-//        //Publish config file
-//        if(function_exists('config_path')){
-//            //If is not a Lumen App...
-//            $this->publishes([
-//            __DIR__.'/../../config/fancourier.php' => config_path('fancourier.php'),
-//        ]);
-//        }
     }
     
     /**

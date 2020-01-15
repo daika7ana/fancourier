@@ -149,7 +149,7 @@ abstract class Base  implements BaseInterface {
      */
     private function checkResultType ()
     {
-        return ['csv', 'plain', 'bool', 'parse', 'html'];
+        return ['csv' ,'plain', 'bool','parse' ,'html' ,'pdf'];
     }
     
     /**
@@ -168,6 +168,8 @@ abstract class Base  implements BaseInterface {
             case 'parse' :
                 return is_callable([$this->instance, 'parseResult']) ? $this->instance->parseResult($result) : $result;
             case 'html' :
+                return is_callable([$this->instance, 'parseResult']) ? $this->instance->parseResult($result) : $result;
+            case 'pdf' :
                 return is_callable([$this->instance, 'parseResult']) ? $this->instance->parseResult($result) : $result;
             default :
                 return $result;
