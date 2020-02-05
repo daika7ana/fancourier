@@ -59,6 +59,8 @@ class Csv {
         $headers    =   $this->getHeaders();
         $data   =   [];
         while($line =   $this->getCurrentLine()) {
+            if(count($headers) !== count($line)) continue;
+            
             $object =   array_combine($headers, $line);
             $data[] = ((object)$object);
         }
