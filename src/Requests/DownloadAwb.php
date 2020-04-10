@@ -55,7 +55,6 @@ class DownloadAwb extends Endpoint {
                 throw new FanCourierInvalidParamException('Must define only the following keys: ' . implode(', ', $fetched_params) . '. ' . (empty($optional) ? '' : 'With only these optionals: '. implode(', ', $optional) . '. ') ) ;
         }
         return true;
-        
     }
     
     /**

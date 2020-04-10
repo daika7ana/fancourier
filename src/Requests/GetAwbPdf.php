@@ -40,7 +40,18 @@ class GetAwbPdf extends Endpoint {
      */
     public function validate($params = array())
     {
-        parent::requiredParams(array_keys($params), $this->methodRequirements());
+        $fetched_params = $this->methodRequirements();
+        $optional = [];
+        if ( !empty($fetched_params['optional'])) {
+            $optional = $fetched_params['optional'];
+            unset($fetched_params['optional']);
+        }
+        
+        if (count(array_diff($fetched_params, array_keys($params))) > 0 ||  
+            (!empty($optional) && count(array_diff(array_diff(array_keys($params), $fetched_params), $optional)) > 0 )  || 
+            (empty($optional) && count(array_diff(array_keys($params), $fetched_params)) > 0 ) ) {
+                throw new FanCourierInvalidParamException('Must define only the following keys: ' . implode(', ', $fetched_params) . '. ' . (empty($optional) ? '' : 'With only these optionals: '. implode(', ', $optional) . '. ') ) ;
+        }
         return true;
     }
     
@@ -51,7 +62,12 @@ class GetAwbPdf extends Endpoint {
     private function methodRequirements() 
     {
         return [
-            'nr', //AWB
+            'nr', // AWB Number
+            'optional' => [
+                'label',
+                'type',
+                'page'
+            ], 
         ];
     }
 }
