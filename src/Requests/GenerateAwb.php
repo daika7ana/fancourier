@@ -46,6 +46,9 @@ class GenerateAwb extends Endpoint {
                 if (empty($result_per_row[0]) && empty($result_per_row[1]) && empty($result_per_row[2])) {
                     continue;
                 }
+                if (count($result_per_row) == 1) {
+                    throw new \Exception($result_per_row[0]);
+                }
                 $return_result[] = (object) ['line' => (int) $result_per_row[0],
                         'awb' => $result_per_row[1] == 1 ? $result_per_row[2] : false,
                         'send_params' => current(array_values($this->keys))[(int) $result_per_row[0]],
