@@ -1,5 +1,5 @@
 <?php
-namespace SeniorProgramming\Fancourier\Services;
+namespace SeniorProgramming\FanCourier\Services;
 
 use SeniorProgramming\FanCourier\Core\Base;
 use SeniorProgramming\FanCourier\Helpers\Hints;

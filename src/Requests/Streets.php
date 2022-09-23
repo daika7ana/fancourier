@@ -1,6 +1,6 @@
 <?php
 
-namespace SeniorProgramming\Fancourier\Requests;
+namespace SeniorProgramming\FanCourier\Requests;
 
 use SeniorProgramming\FanCourier\Core\Endpoint;
 
