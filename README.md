@@ -1,13 +1,10 @@
-
-
-
 ## FanCourier API Client
 
 A simple FanCourier implementation for Laravel.
 
 ## Installation
 
-Install the package through [Composer](http://getcomposer.org/). 
+Install the package through [Composer](http://getcomposer.org/).
 
 Run the Composer require command from the Terminal:
 
@@ -17,11 +14,11 @@ Now all you have to do is add the service provider of the package and alias the 
 
 Add a new line to the `providers` array:
 
-	SeniorProgramming\FanCourier\Providers\ApiServiceProvider::class,
+    SeniorProgramming\FanCourier\Providers\ApiServiceProvider::class,
 
 And optionally add a new line to the `aliases` array:
 
-	'FanCourier' => SeniorProgramming\FanCourier\Facades\FanCourier::class,
+    'FanCourier' => SeniorProgramming\FanCourier\Facades\FanCourier::class,
 
 Important, add in .env FanCourier credentials:
 
@@ -33,13 +30,13 @@ FANCOURIER_CLIENT_ID=
 
 Now you're ready to start using the FanCourier API Client in your application.
 
-
 ## Overview
+
 Look at one of the following topics to learn more about FanCourier API Clien
 
-* [Usage](#usage)
-* [Exceptions](#exceptions)
-* [Example](#example)
+- [Usage](#usage)
+- [Exceptions](#exceptions)
+- [Example](#example)
 
 ## Usage
 
@@ -52,6 +49,7 @@ Retrieves cities based on county if specificed and other info.
 ```php
 FanCourier::city()
 ```
+
 **The `city()` method will return an array of objects with: judet, localitate, agentie, km, cod_rutare, id_localitate_fan.**
 
 ### FanCourier::streets()
@@ -61,6 +59,7 @@ Retrieves streets based on county or city if specificed and other info.
 ```php
 FanCourier::streets()
 ```
+
 **The `streets()` method will return an array of objects with: judet, localitate, strada, de_la, pana_la, paritate, cod_postal, tip, cod_cartare, numar_depozite.**
 
 ### FanCourier::price()
@@ -75,14 +74,13 @@ FanCourier::price()
 
 ### FanCourier::trackAwb()
 
-Track expedition using AWB code. 
+Track expedition using AWB code.
 
 ```php
 FanCourier::trackAwb()
 ```
 
 **The `trackAwb()` method will return a plain text.**
-
 
 ### FanCourier::generateAwb()
 
@@ -93,7 +91,6 @@ FanCourier::generateAwb()
 ```
 
 **The `generateAwb()` method will return an array of objects with: line, awb, send_params, error_message.**
-
 
 ### FanCourier::order()
 
@@ -113,12 +110,11 @@ All FanCourier AWB with errors.
 FanCourier::exportAwbErrors()
 ```
 
-**The `exportAwbErrors()` method will return an empty array  or with objects containing: nume, judet, localitate, telefon, plicuri, colete, greutate, descriere.**
-
+**The `exportAwbErrors()` method will return an empty array or with objects containing: nume, judet, localitate, telefon, plicuri, colete, greutate, descriere.**
 
 ### FanCourier::deleteAwb()
 
-Deletes AWB only if the shipping process is not finished. 
+Deletes AWB only if the shipping process is not finished.
 
 ```php
 FanCourier::deleteAwb()
@@ -126,10 +122,9 @@ FanCourier::deleteAwb()
 
 **The `deleteAwb()` method will return an int if the request is made successfully or the error message.**
 
-
 ### FanCourier::getAwb()
 
-Returns documents containing shipping details. 
+Returns documents containing shipping details.
 
 ```php
 FanCourier::getAwb()
@@ -147,7 +142,6 @@ FanCourier::downloadAwb()
 
 **The `downloadAwb()` method will return a jpg if the request is made successfully or the error message.**
 
-
 ### FanCourier::exportOrders()
 
 All orders made within selected date through FanCourier::order method.
@@ -156,17 +150,17 @@ All orders made within selected date through FanCourier::order method.
 FanCourier::exportOrders()
 ```
 
-**The `exportOrders()` method will return an empty array  or with objects containing: nr._crt., data_ridicare_comanda, ora_de_la, ora_pana_la, persoana_contact, telefon, email, colete, numar_comanda, status.**
+**The `exportOrders()` method will return an empty array or with objects containing: nr.\_crt., data_ridicare_comanda, ora_de_la, ora_pana_la, persoana_contact, telefon, email, colete, numar_comanda, status.**
 
 ### FanCourier::exportBorderou()
 
-All orders made within selected date through FanCourier::generateAwb method. 
+All orders made within selected date through FanCourier::generateAwb method.
 
 ```php
 FanCourier::exportBorderou()
 ```
 
-**The `exportBorderou()` method will return an empty array  or with objects containing: nr._crt., awb, ridicat, status, data_confirmarii, restituire, tip_serviciu, continut...**
+**The `exportBorderou()` method will return an empty array or with objects containing: nr.\_crt., awb, ridicat, status, data_confirmarii, restituire, tip_serviciu, continut...**
 
 ### FanCourier::exportReports()
 
@@ -176,21 +170,21 @@ Returns all expeditions that have placed the total amount in the deposit account
 FanCourier::exportReports()
 ```
 
-**The `exportReports()` method will return an empty array  or with objects containing: oras_destinatar, dat_awb, suma_incasata, numar_awb, numar_awb, expeditor, destinatar, continut, persoanaD, data_virament, persoanaE, ramburs_la_awb, awb_retur**
+**The `exportReports()` method will return an empty array or with objects containing: oras_destinatar, dat_awb, suma_incasata, numar_awb, numar_awb, expeditor, destinatar, continut, persoanaD, data_virament, persoanaE, ramburs_la_awb, awb_retur**
 
 ### FanCourier::exportObservations()
 
-Returns all observations that can be set when an expedition is requested. 
+Returns all observations that can be set when an expedition is requested.
 
 ```php
 FanCourier::exportObservations()
 ```
 
-**The `exportObservations()` method will return an empty array  or with objects containing: observatii_fan_courier**
+**The `exportObservations()` method will return an empty array or with objects containing: observatii_fan_courier**
 
 ### FanCourier::endBorderou()
 
-Will close all orders made for the current date. 
+Will close all orders made for the current date.
 
 ```php
 FanCourier::endBorderou()
@@ -198,25 +192,25 @@ FanCourier::endBorderou()
 
 **The `endBorderou()` method will return a html **
 
-
 ## Exceptions
 
 The FanCourier package will throw exceptions if something goes wrong. This way it's easier to debug your code using the FanCourier package or to handle the error based on the type of exceptions. The FanCourier packages can throw the following exceptions:
 
-| Exception                         | 
-| ----------------------------------|
-| *FanCourierInstanceException*     | 
-| *FanCourierInvalidParamException* |                  
-| *FanCourierUnknownModelException* |  
-
+| Exception                         |
+| --------------------------------- |
+| _FanCourierInstanceException_     |
+| _FanCourierInvalidParamException_ |
+| _FanCourierUnknownModelException_ |
 
 ## Example
 
 **FanCourier::city()**
 To fetch specific county
+
 ```php
 FanCourier::city(['judet'=>'Constanta', 'language'=>'RO'])
 ```
+
 or to fetch all counties
 
 ```php
@@ -225,9 +219,11 @@ FanCourier::city()
 
 **FanCourier::streets()**
 To fetch specific county
+
 ```php
 FanCourier::streets(['judet'=>'Bucuresti', 'localitate'=>'Bucuresti', 'language'=>'RO'])
 ```
+
 or to fetch all streets from Romania
 
 ```php
@@ -236,6 +232,7 @@ FanCourier::streets()
 
 **FanCourier::price()**
 Internal service
+
 ```php
 FanCourier::price([
     'serviciu' => 'standard',
@@ -254,6 +251,7 @@ FanCourier::price([
 ```
 
 External service
+
 ```php
 FanCourier::price([
     'serviciu' => 'export',
@@ -271,13 +269,13 @@ FanCourier::price([
 ])
 ```
 
-
 **FanCourier::order()**
 Internal service
+
 ```php
 FanCourier::generateAwb(['fisier' => [
     [
-        'tip_serviciu' => 'standard', 
+        'tip_serviciu' => 'standard',
         'banca' => '',
         'iban' =>  '',
         'nr_plicuri' => 1,
@@ -352,15 +350,17 @@ FanCourier::generateAwb(['fisier' => [
 ```
 
 **FanCourier::trackAwb()**
+
 ```php
 FanCourier::trackAwb([
-    'AWB'=>'2337600120003', 
+    'AWB'=>'2337600120003',
     'display_mode' => 3 //1 – last status, 2 – last record from history route, 3 – all history of the expedition
 ])
 ```
 
 **FanCourier::order()**
 Internal service
+
 ```php
 FanCourier::order([
     'nr_colete' => 1, // or 'nr_plicuri' => 1
@@ -384,7 +384,6 @@ FanCourier::order([
     'judet' => 'Constanta',
 ])
 ```
-
 
 **FanCourier::exportServices()**
 
@@ -431,7 +430,6 @@ FanCourier::exportBorderou(['data'=>'09.12.2016', 'mode'=> 0])
 ```php
 FanCourier::exportReports(['data'=>'09.12.2016'])
 ```
-
 
 **FanCourier::exportObservations()**
 

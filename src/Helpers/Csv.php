@@ -5,7 +5,8 @@ namespace SeniorProgramming\FanCourier\Helpers;
 use SeniorProgramming\FanCourier\Exceptions\FanCourierInstanceException;
 use CURLFile;
 
-class Csv {
+class Csv
+{
     protected $fh   =   NULL;
     protected $lineLength   =   NULL;
     protected $lineSeparator    =   "\n";
@@ -58,13 +59,13 @@ class Csv {
         $this->reset();
         $headers    =   $this->getHeaders();
         $data   =   [];
-        while($line =   $this->getCurrentLine()) {
-            if(count($headers) !== count($line)) continue;
-            
+        while ($line =   $this->getCurrentLine()) {
+            if (count($headers) !== count($line)) continue;
+
             $object =   array_combine($headers, $line);
             $data[] = ((object)$object);
         }
-        return $data;    
+        return $data;
     }
 
     protected function getCurrentLine()
@@ -74,7 +75,7 @@ class Csv {
 
     public function setHeaders($headers)
     {
-        array_walk($headers, function (&$val){
+        array_walk($headers, function (&$val) {
             $val =  strtolower(str_replace(' ', '_', $val));
         });
         $this->headers = $headers;
@@ -82,8 +83,7 @@ class Csv {
 
     public function getHeaders()
     {
-        if(!$this->headers)
-        {
+        if (!$this->headers) {
             $this->setHeaders($this->getCurrentLine());
         }
 
@@ -102,27 +102,27 @@ class Csv {
         $csv->setString($datastring);
         return $csv->generateRows();
     }
-    
-    public static function convertToCSV($data, $header) {
+
+    public static function convertToCSV($data, $header)
+    {
         $return_data = [];
         foreach ($data as $key => $value) {
-            
-            $filename = @tempnam("/tmp", "FanCourier".  time(). ".csv");
+
+            $filename = @tempnam("/tmp", "FanCourier" .  time() . ".csv");
             $csv = fopen($filename, 'w');
             try {
                 reset($value);
                 $columns = array_keys(current($value));
-                
+
                 foreach ($columns as &$val) {
                     $val = $header[$val];
                 }
 
                 fputcsv($csv, $columns);
-                
+
                 foreach ($value as $row) {
                     fputcsv($csv, $row);
                 }
-                
             } catch (\Exception $exc) {
                 throw new FanCourierInstanceException($exc->getTraceAsString());
             } finally {

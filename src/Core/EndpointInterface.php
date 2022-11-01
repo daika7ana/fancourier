@@ -2,12 +2,11 @@
 
 namespace SeniorProgramming\FanCourier\Core;
 
-interface EndpointInterface {
-    
+interface EndpointInterface
+{
     public function set($params);
-    
+
     public function fetchResults();
-    
+
     public function validate($params);
 }
-

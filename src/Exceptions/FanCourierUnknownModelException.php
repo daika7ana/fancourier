@@ -2,7 +2,7 @@
 
 namespace SeniorProgramming\FanCourier\Exceptions;
 
-class FanCourierUnknownModelException extends \BadMethodCallException {
-    
-    
+class FanCourierUnknownModelException extends \BadMethodCallException
+{
+    //
 }

@@ -21,5 +21,15 @@
         "psr-4": {
             "SeniorProgramming\\FanCourier\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SeniorProgramming\\FanCourier\\Providers\\ApiServiceProvider"
+            ],
+            "aliases": {
+                "FanCourier": "SeniorProgramming\\FanCourier\\Facades\\FanCourier"
+            }
+        }
     }
 }

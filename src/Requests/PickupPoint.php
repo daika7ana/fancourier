@@ -4,15 +4,17 @@ namespace SeniorProgramming\FanCourier\Requests;
 
 use SeniorProgramming\FanCourier\Core\Endpoint;
 
-class City extends Endpoint
+class PickupPoint extends Endpoint
 {
+    protected $type = 'fanbox';
+
     /**
      *
      * @return string
      */
     protected function getCallMethod()
     {
-        return 'export_distante_integrat.php';
+        return 'pickup-points.php';
     }
 
     /**
@@ -21,7 +23,17 @@ class City extends Endpoint
      */
     public function fetchResults()
     {
-        return 'csv';
+        return 'json';
+    }
+
+    /**
+     *
+     * @param string $result
+     * @return int|string
+     */
+    public function parseResult($result)
+    {
+        return json_decode($result, true);
     }
 
     /**
@@ -34,7 +46,7 @@ class City extends Endpoint
         if (empty($params))
             return true;
 
-        parent::optionalParams(array_keys($params), ['judet', 'language']);
+        parent::optionalParams(array_keys($params), ['type']);
         return true;
     }
 }

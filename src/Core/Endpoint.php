@@ -5,12 +5,10 @@ namespace SeniorProgramming\FanCourier\Core;
 use SeniorProgramming\FanCourier\Exceptions\FanCourierInvalidParamException;
 use SeniorProgramming\FanCourier\Core\EndpointInterface;
 
-
 abstract class Endpoint implements EndpointInterface
 {
-
     /**
-     * 
+     *
      * @param array $params
      * @return array
      * @throws FanCourierInvalidParamException
@@ -26,7 +24,7 @@ abstract class Endpoint implements EndpointInterface
     }
 
     /**
-     * 
+     *
      * @param array $params
      * @return \SeniorProgramming\FanCourier\Core\Endpoint
      */
@@ -41,7 +39,7 @@ abstract class Endpoint implements EndpointInterface
     }
 
     /*
-     * 
+     *
      */
     public function __set($name, $value)
     {
@@ -49,7 +47,7 @@ abstract class Endpoint implements EndpointInterface
     }
 
     /*
-     * 
+     *
      */
     public function __get($name)
     {
@@ -57,7 +55,7 @@ abstract class Endpoint implements EndpointInterface
     }
 
     /**
-     * 
+     *
      * @param array $set
      * @param array $required
      * @throws FanCourierInvalidParamException
@@ -70,7 +68,7 @@ abstract class Endpoint implements EndpointInterface
     }
 
     /**
-     * 
+     *
      * @param array $set
      * @param array $accepted
      * @throws FanCourierInvalidParamException

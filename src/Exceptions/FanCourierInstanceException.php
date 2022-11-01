@@ -2,7 +2,7 @@
 
 namespace SeniorProgramming\FanCourier\Exceptions;
 
-class FanCourierInstanceException extends \Exception {
-    
-    
+class FanCourierInstanceException extends \Exception
+{
+    //
 }

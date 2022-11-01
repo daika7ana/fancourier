@@ -2,8 +2,8 @@
 
 namespace SeniorProgramming\FanCourier\Helpers;
 
-class Hints {
-    
+class Hints
+{
     public static function importCsvKeys()
     {
         return [
@@ -44,7 +44,7 @@ class Hints {
             'date_personale',
         ];
     }
-    
+
     public static function importCsvValues()
     {
         return [
@@ -85,6 +85,4 @@ class Hints {
             'date_personale' => 'Date personale',
         ];
     }
-    
 }
-
