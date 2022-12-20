@@ -6,7 +6,7 @@ use SeniorProgramming\FanCourier\Core\Endpoint;
 
 class PickupPoint extends Endpoint
 {
-    protected $type = 'fanbox';
+    public $type = 'fanbox';
 
     /**
      *
