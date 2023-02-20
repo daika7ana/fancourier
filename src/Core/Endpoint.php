@@ -5,6 +5,7 @@ namespace SeniorProgramming\FanCourier\Core;
 use SeniorProgramming\FanCourier\Exceptions\FanCourierInvalidParamException;
 use SeniorProgramming\FanCourier\Core\EndpointInterface;
 
+#[\AllowDynamicProperties]
 abstract class Endpoint implements EndpointInterface
 {
     /**
