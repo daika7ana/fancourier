@@ -114,7 +114,6 @@ abstract class Base  implements BaseInterface
      */
     private function checkUrl($url)
     {
-
         if (filter_var($url, FILTER_VALIDATE_URL) === false) {
             throw new FanCourierInstanceException("Invalid url request");
         }
@@ -127,16 +126,11 @@ abstract class Base  implements BaseInterface
      */
     private function checkParams($data)
     {
-
         if (!is_array($data) && empty($data)) {
             throw new \Exception("Invalid params");
         }
 
-        if (!is_array($data) && empty($data)) {
-            throw new \Exception("Invalid params");
-        }
-
-        if (empty($data['username']) ||  empty($data['user_pass']) || empty($data['client_id'])) {
+        if (empty($data['username']) ||  empty($data['user_pass'])) {
             throw new \Exception("Invalid credentials");
         }
     }
@@ -164,12 +158,9 @@ abstract class Base  implements BaseInterface
             case 'bool':
                 return is_callable([$this->instance, 'parseResult']) ? $this->instance->parseResult($result) : false;
             case 'parse':
-                return is_callable([$this->instance, 'parseResult']) ? $this->instance->parseResult($result) : $result;
             case 'html':
-                return is_callable([$this->instance, 'parseResult']) ? $this->instance->parseResult($result) : $result;
-            case 'pdf':
-                return is_callable([$this->instance, 'parseResult']) ? $this->instance->parseResult($result) : $result;
             case 'json':
+            case 'pdf':
                 return is_callable([$this->instance, 'parseResult']) ? $this->instance->parseResult($result) : $result;
             default:
                 return $result;

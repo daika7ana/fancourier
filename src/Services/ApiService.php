@@ -18,8 +18,8 @@ class ApiService extends Base
      */
     public function __construct()
     {
-        if (!config('fancourier.username') || !config('fancourier.password') || !config('fancourier.client_id')) {
-            throw new FanCourierInvalidParamException('Please set FANCOURIER_USERNAME, FANCOURIER_PASSWORD and FANCOURIER_CLIENT_ID environment variables.');
+        if (!config('fancourier.username') || !config('fancourier.password')) {
+            throw new FanCourierInvalidParamException('Please set FANCOURIER_USERNAME, FANCOURIER_PASSWORD environment variables.');
         }
 
         $this->credentials = (object) [
