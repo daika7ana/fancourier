@@ -56,8 +56,10 @@ abstract class Base  implements BaseInterface
             $params = Csv::convertToCSV($this->instance->getParams(), $this->instance->convertInCsv());
         }
 
-        $params += (array) $credentials;
-        return $this->postCurlRequest($params, $url, $object->fetchResults());
+        $params += $credentials;
+        $requestClass = class_basename($object);
+
+        return $this->postCurlRequest($params, $requestClass, $url, $object->fetchResults());
     }
 
     /**
@@ -68,9 +70,9 @@ abstract class Base  implements BaseInterface
      * @return string
      * @throws FanCourierInstanceException
      */
-    private function postCurlRequest($data, $url, $resultType)
+    private function postCurlRequest($data, $requestClass, $url, $resultType)
     {
-        $this->checkParams($data);
+        $this->checkParams($data, $requestClass);
         $this->checkUrl($url);
 
         $client = new Guzzle();
@@ -101,7 +103,7 @@ abstract class Base  implements BaseInterface
     private function getUrl($object)
     {
         if (empty($object->callMethod)) {
-            throw new FanCourierInstanceException("Unset url request");
+            throw new FanCourierInstanceException("Invalid request URL.");
         }
 
         return $object->callMethod;
@@ -115,7 +117,7 @@ abstract class Base  implements BaseInterface
     private function checkUrl($url)
     {
         if (filter_var($url, FILTER_VALIDATE_URL) === false) {
-            throw new FanCourierInstanceException("Invalid url request");
+            throw new FanCourierInstanceException("Invalid request URL.");
         }
     }
 
@@ -124,14 +126,18 @@ abstract class Base  implements BaseInterface
      * @param array $data
      * @throws \Exception
      */
-    private function checkParams($data)
+    private function checkParams($data, $requestClass)
     {
         if (!is_array($data) && empty($data)) {
-            throw new \Exception("Invalid params");
+            throw new \UnexpectedValueException("Invalid parameters.");
         }
 
-        if (empty($data['username']) ||  empty($data['user_pass'])) {
-            throw new \Exception("Invalid credentials");
+        if (empty($data['username']) || empty($data['user_pass'])) {
+            throw new \UnexpectedValueException("Invalid credentials.");
+        }
+
+        if (!in_array($requestClass, ['ClientIds']) && empty($data['client_id'])) {
+            throw new \InvalidArgumentException("Parameter client_id is required for this method.");
         }
     }
 

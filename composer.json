@@ -12,12 +12,13 @@
             "email": "danradu.pana@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": ">=7.4",
-        "guzzlehttp/guzzle": "^6|^7"
+        "guzzlehttp/guzzle": "^6|^7",
+        "illuminate/support": ">=6.0"
     },
-    "autoload":{
+    "minimum-stability": "stable",
+    "autoload": {
         "psr-4": {
             "SeniorProgramming\\FanCourier\\": "src/"
         }

@@ -22,11 +22,11 @@ class ApiService extends Base
             throw new FanCourierInvalidParamException('Please set FANCOURIER_USERNAME, FANCOURIER_PASSWORD environment variables.');
         }
 
-        $this->credentials = (object) [
+        $this->credentials = array_filter([
             'username'  => config('fancourier.username'),
             'user_pass'  => config('fancourier.password'),
             'client_id' => config('fancourier.client_id'),
-        ];
+        ]);
     }
 
     /**
@@ -37,7 +37,7 @@ class ApiService extends Base
      * @throws FanCourierUnknownModelException
      * @throws FanCourierInstanceException
      */
-    public function __call($method, $args = array())
+    public function __call($method, $args = [])
     {
         $instance = parent::instantiate(ucfirst($method));
 
