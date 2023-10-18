@@ -75,9 +75,12 @@ abstract class Base  implements BaseInterface
         $this->checkParams($data, $requestClass);
         $this->checkUrl($url);
 
-        $client = new Guzzle();
+        $client = new Guzzle([
+            'timeout' => 10,
+            'connect_timeout' => 10,
+        ]);
+        
         $new_data = [];
-
         foreach ($data as $key => $value) {
             $new_data[] = array(
                 'name' => $key,
