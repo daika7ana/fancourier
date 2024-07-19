@@ -2,6 +2,7 @@
 
 namespace SeniorProgramming\FanCourier\Requests;
 
+use Exception;
 use SeniorProgramming\FanCourier\Core\Endpoint;
 use SeniorProgramming\FanCourier\Helpers\Hints;
 use SeniorProgramming\FanCourier\Exceptions\FanCourierInvalidParamException;
@@ -47,13 +48,14 @@ class GenerateAwb extends Endpoint
                 if (empty($result_per_row[0]) && empty($result_per_row[1]) && empty($result_per_row[2])) {
                     continue;
                 }
-                if (count($result_per_row) == 1) {
-                    throw new \Exception($result_per_row[0]);
+                if (count($result_per_row) === 1) {
+                    throw new Exception($result_per_row[0]);
                 }
+                $result_per_row[0] = (int) preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $result_per_row[0]);
                 $return_result[] = (object) [
-                    'line' => (int) $result_per_row[0],
+                    'line' => $result_per_row[0],
                     'awb' => $result_per_row[1] == 1 ? $result_per_row[2] : false,
-                    'send_params' => current(array_values($this->keys))[(int) $result_per_row[0]],
+                    'send_params' => current(array_values($this->keys))[$result_per_row[0]],
                     'error_message' => $result_per_row[1] == 1 ? '' : $result_per_row[2]
                 ];
             }
